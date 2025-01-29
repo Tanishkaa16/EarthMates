@@ -7,7 +7,6 @@ export default async ({
 }: {
   expressApp: Express.Application;
 }): Promise<void> => {
-
   await express({ app: expressApp });
   LoggerInstance.info('Express App Intialized');
   LoggerInstance.info('All modules loaded!');

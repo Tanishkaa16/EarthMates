@@ -5,10 +5,12 @@ dotenv.config();
 
 const envSchema = z.object({
   PORT: z.string(),
-  SUPABASE_URL: z.string(),
-  SUPABASE_KEY: z.string(),
   NODE_ENV: z.string(),
   JWT_SECRET: z.string(),
+  MINIO_PORT: z.number(),
+  MINIO_END_POINT:z.string(),
+  ACCESS_KEY: z.string(),
+  SECRET_KEY: z.string()
 });
 
 const env = envSchema.parse(process.env);
@@ -18,6 +20,10 @@ export default {
   PORT: env.PORT,
   NODE_ENV: env.NODE_ENV,
   JWT_SECRET: env.JWT_SECRET,
+  MINIO_PORT: env.MINIO_PORT,
+  MINIO_END_POINT: env.MINIO_END_POINT,
+  ACCESS_KEY: env.ACCESS_KEY,
+  SECRET_KEY: env.SECRET_KEY,
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },
