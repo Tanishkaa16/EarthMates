@@ -7,10 +7,11 @@ const envSchema = z.object({
   PORT: z.string(),
   NODE_ENV: z.string(),
   JWT_SECRET: z.string(),
-  MINIO_PORT: z.number(),
-  MINIO_END_POINT:z.string(),
+  MINIO_PORT: z.string().transform(Number),
+  MINIO_END_POINT: z.string(),
   ACCESS_KEY: z.string(),
-  SECRET_KEY: z.string()
+  SECRET_KEY: z.string(),
+  MONGODB_URI: z.string(),
 });
 
 const env = envSchema.parse(process.env);
@@ -24,6 +25,7 @@ export default {
   MINIO_END_POINT: env.MINIO_END_POINT,
   ACCESS_KEY: env.ACCESS_KEY,
   SECRET_KEY: env.SECRET_KEY,
+  MONGODB_URI: env.MONGODB_URI,
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },

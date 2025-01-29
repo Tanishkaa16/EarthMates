@@ -4,7 +4,7 @@ import type express from 'express';
 import helmet from 'helmet';
 import routes from '../api';
 import config from '../config';
-import { errorHandler } from '../middlewares/errorHandler';
+import { errorHandler } from '../shared/middlewares/errorHandler';
 
 export default ({ app }: { app: express.Application }): void => {
   app.enable('trust proxy');

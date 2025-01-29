@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import LoggerInstance from '../loaders/logger';
+import LoggerInstance from '../../loaders/logger';
 
 export interface ApiError extends Error {
   message: string;
