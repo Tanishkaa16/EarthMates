@@ -1,3 +1,4 @@
+import { validateRequest } from '@/shared/middlewares/validator';
 import {
   type NextFunction,
   type Request,
@@ -5,6 +6,7 @@ import {
   Router,
 } from 'express';
 import { MESSAGES } from '../../shared/constants';
+import { AuthSchema } from './auth.schema';
 import { handleLogin, handleSignUp } from './auth.service';
 
 export const handleUser = async (
@@ -15,7 +17,7 @@ export const handleUser = async (
   const { username, password, email } = req.body;
   try {
     await handleSignUp({ username, password, email });
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       message: MESSAGES.SIGNED_IN,
     });
@@ -35,6 +37,7 @@ export const handleUserLogin = async (
     res.status(200).json({
       success: true,
       message: MESSAGES.LOGGED_IN,
+      token,
     });
   } catch (error) {
     next(error);

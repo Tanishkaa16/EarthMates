@@ -49,4 +49,25 @@ export const ERRORS = {
       error_description: 'Invalid token',
     },
   },
+  IMAGE_UPLOAD_FAILED: {
+    statusCode: 500,
+    message: {
+      error: 'Image upload failed',
+      error_description: 'Image upload failed',
+    },
+  },
+  POST_CREATION_FAILED: {
+    statusCode: 500,
+    message: {
+      error: 'Post creation failed',
+      error_description: 'Post creation failed',
+    },
+  },
+  FILE_UPLOAD_FAILED: {
+    statusCode: 500,
+    message: {
+      error: 'File upload failed',
+      error_description: 'File upload failed',
+    },
+  },
 };

@@ -17,4 +17,13 @@ export const userSchema = z.object({
   activity: z.array(activityEntrySchema).default([]),
 });
 
+export const PostSchema = z.object({
+  postId: z.string(),
+  imageUrl: z.string(),
+  tag: z.string(),
+  description: z.string(),
+  username: z.string(),
+});
+
 export type UserSchemaType = z.infer<typeof userSchema>;
+export type PostSchemaType = z.infer<typeof PostSchema>;
