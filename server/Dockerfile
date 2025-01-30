@@ -28,8 +28,6 @@ COPY . .
 
 COPY .env.docker .env
 
-RUN pnpm lint
-RUN pnpm format
 RUN pnpm build
 
 FROM base as final
