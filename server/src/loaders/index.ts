@@ -8,8 +8,6 @@ export default async ({
 }: {
   expressApp: Express.Application;
 }): Promise<void> => {
-  await initializeClient();
-  LoggerInstance.info('MongoDB Connected!');
   express({ app: expressApp });
   LoggerInstance.info('Express App Intialized');
   LoggerInstance.info('All modules loaded!');
