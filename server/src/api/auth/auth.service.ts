@@ -1,20 +1,17 @@
 import bcrypt from 'bcryptjs';
-import db from '../../loaders/db';
+import pool from '../../loaders/mysql'; 
 import { ROUNDS } from '../../shared/constants';
 import { ERRORS } from '../../shared/errors';
 import generateToken from '../../shared/middlewares/jwt';
 import type { UserSchemaType } from '../user/user.schema';
 import type { AuthSchemaType } from './auth.schema';
+import { RowDataPacket } from 'mysql2';
 
 export async function usernameExists(username: string): Promise<boolean> {
-  const userCollection = (await db()).collection<UserSchemaType>('user');
-  const existingUser = await userCollection.findOne({
-    username: { $regex: new RegExp(username, 'i') },
-  });
-  if (existingUser) {
-    return true;
-  }
-  return false;
+  const query = `SELECT COUNT(*) FROM users WHERE username = ?`;
+  const [rows] = await pool.execute<RowDataPacket[]>(query, [username]);
+  const count = rows[0].count;
+  return count > 0;
 }
 
 export async function handleSignUp({
@@ -22,7 +19,6 @@ export async function handleSignUp({
   password,
   email,
 }: AuthSchemaType) {
-  const usersCollection = (await db()).collection<UserSchemaType>('user');
   const exists = await usernameExists(username);
 
   if (exists) {
@@ -34,35 +30,30 @@ export async function handleSignUp({
 
   const hash = await bcrypt.hash(password, ROUNDS);
 
-  const newUser: UserSchemaType = {
-    username,
-    password: hash,
-    email,
-    events: [],
-    points: 0,
-    badges: [],
-    activity: [],
-  };
-  await usersCollection.insertOne(newUser);
+  const query = `
+    INSERT INTO users (username, password, email, points)
+    VALUES (?, ?, ?, ?)
+  `;
+  await pool.execute(query, [username, hash, email, 0]);
 }
 
 export async function handleLogin({
   username,
   password,
 }: AuthSchemaType): Promise<string> {
-  const usersCollection = (await db()).collection<UserSchemaType>('user');
-  const data = await usersCollection.findOne({ username: username });
+  const query = `SELECT * FROM users WHERE username = ?`;
+  const [rows] = await pool.execute<RowDataPacket[]>(query, [username]);
 
-  if (!data) {
+  if (rows.length === 0) {
     throw {
       statusCode: ERRORS.USER_NOT_FOUND.code,
       message: ERRORS.USER_NOT_FOUND.message.error,
     };
   }
-  const pswd = password;
-  const res = bcrypt.compare(pswd, password);
+  const user = rows[0];
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
-  if (!res) {
+  if (!isPasswordValid) {
     throw {
       statusCode: ERRORS.UNAUTHORIZED.statusCode,
       message: ERRORS.UNAUTHORIZED.message.error,

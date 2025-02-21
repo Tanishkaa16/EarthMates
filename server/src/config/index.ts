@@ -11,7 +11,10 @@ const envSchema = z.object({
   MINIO_END_POINT: z.string(),
   ACCESS_KEY: z.string(),
   SECRET_KEY: z.string(),
-  MONGODB_URI: z.string(),
+  DB_HOST: z.string(),
+  DB_USER: z.string(),
+  DB_PASS: z.string(),
+  DB_NAME: z.string(),
 });
 
 const env = envSchema.parse(process.env);
@@ -25,7 +28,10 @@ export default {
   MINIO_END_POINT: env.MINIO_END_POINT,
   ACCESS_KEY: env.ACCESS_KEY,
   SECRET_KEY: env.SECRET_KEY,
-  MONGODB_URI: env.MONGODB_URI,
+  DB_HOST: env.DB_HOST,
+  DB_USER: env.DB_USER,
+  DB_PASS: env.DB_PASS,
+  DB_NAME: env.DB_NAME,
   logs: {
     level: process.env.LOG_LEVEL || 'silly',
   },
