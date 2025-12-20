@@ -83,7 +83,7 @@ MinIO
 npm or yarn
 
 Clone Repository
-git clone https://github.com/your-username/EarthMates.git
+git clone https://github.com/mewta/EarthMates.git
 cd EarthMates-main
 
 Backend Setup
@@ -154,84 +154,6 @@ Mobile application support
 License
 
 MIT License
-
-If you want a shorter README, hackathon version, or resume-optimized version, say the word.
-
-no bro giving according to goithub
-
-Understood. You want a very standard GitHub-style README — minimal, clean, no storytelling, no fluff.
-Below is exactly copy-paste ready and matches what most GitHub repos use.
-
-EarthMates
-
-EarthMates is a full-stack web application for promoting eco-friendly living by connecting users with NGOs, events, and volunteering opportunities.
-
-Tech Stack
-
-Frontend: Next.js, React, TypeScript, Tailwind CSS
-
-Backend: Node.js, Express.js, TypeScript
-
-Database: MySQL
-
-Authentication: JWT
-
-Storage: MinIO
-
-Features
-
-User authentication and authorization
-
-NGO and event management
-
-Volunteering opportunities
-
-Secure file uploads
-
-RESTful APIs
-
-Responsive frontend
-
-Project Structure
-client/     # Frontend (Next.js)
-server/     # Backend (Express + TypeScript)
-
-Getting Started
-Prerequisites
-
-Node.js (v18+)
-
-MySQL
-
-MinIO
-
-Installation
-git clone https://github.com/your-username/EarthMates.git
-cd EarthMates
-
-Backend
-cd server
-npm install
-npm run dev
-
-
-Create a .env file in server:
-
-PORT=5000
-JWT_SECRET=your_jwt_secret
-MYSQL_HOST=localhost
-MYSQL_USER=root
-MYSQL_PASSWORD=your_password
-MYSQL_DATABASE=earthmates
-MINIO_ENDPOINT=localhost
-MINIO_PORT=9000
-MINIO_ACCESS_KEY=your_access_key
-MINIO_SECRET_KEY=your_secret_key
-
-Frontend
-cd client
-npm install
-npm run dev
 
 
 Frontend available at http://localhost:3000
